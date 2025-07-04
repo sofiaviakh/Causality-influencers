@@ -49,6 +49,18 @@ ggboxplot(data, x = "influencer_type", y = "perceived_trust",
           add = "mean_sd", ylab = "Confianza Percibida", xlab = "Tipo de Influencer") +
   ggtitle("Confianza Percibida por Tipo de Influencer")
 
+#We create a dispersion plot with jitter to show individual trust scores by influencer type.
+
+ggplot(data, aes(x = influencer_type, y = perceived_trust, color = influencer_type)) +
+  geom_jitter(width = 0.2, height = 0, size = 3, alpha = 0.7) +  # scatter with jitter
+  stat_summary(fun = mean, geom = "point", shape = 18, size = 5, color = "black") + # mean points
+  stat_summary(fun.data = mean_se, geom = "errorbar", width = 0.1, color = "black") + # error bars for SE
+  labs(title = "Dispersion of Trust Scores by Influencer Type",
+       x = "Influencer Type",
+       y = "Trust Score") +
+  theme_minimal() +
+  theme(legend.position = "none")
+
 
 
 #6. Analyzed purchase intention
